@@ -5267,3 +5267,12 @@ background-color: #f3ab1c;
 height: 64px;
 margin-bottom: -3px;
 }  
+
+#header #stacks {
+height: 44px;
+background-color: transparent;
+}
+
+.left {
+float: left!important;
+}
