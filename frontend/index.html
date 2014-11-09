@@ -13,7 +13,17 @@
     <meta property="og:title" content="TalentTrail - Internships Delivered" />
     <meta name="description" property="og:description" content="TalentTrail is a service which helps students and recruiters find their most compatible match by comparing applicants' personality, abilities, and dreams, with companies' culture and talent needs to deliver a tailored internship or job!" />
     <link rel="stylesheet" href="css/foundation.css" />
-
+    <script src="js/jquery-2.1.1.min.js"/>
+    <script>
+      $(document).ready(function() {
+        alert("f");
+      });
+      /*$(window).on('resize', function(){
+            var win = $(this); //this = window
+            alert(win.height());
+            $("#hoverYes").css({"height": win.height()});
+      });*/
+    </script>
   </head>
   <body>
   <div class="row fullWidth" id="header">
@@ -42,14 +52,16 @@
     </div>
 </div>
 <center>
-  <div id="timer"> <!--for the timer-->
-    <h3 style="font-size:40px; color:#63B9D2;">02:32</h3>
+  <div id="divtimer"> <!--for the timer-->
+    <h3 style="font-size:13px; color:#82848B; padding-top: 16px; margin-bottom: 0px; height:20px;">time remaining</h3>
+    <h3 id="timer">02:32</h3>
   </div>
 </center>
 <center>
 <div id="swipeThis"> <!--for the body of the swiping thing-->
   <img src="http://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg">
 </div>
+<div id="hoverYes"></div>
   </center>  
   </body>
 </html>

@@ -5263,46 +5263,68 @@ th.hide-for-touch {
 .touch th.show-for-touch {
   display: table-cell !important; }
 
+#divtimer {
+  width: 200px;
+  height: 90px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: #3A393F;
+  border-radius: 25px;
+}
+
 #timer {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  font-size:45px; 
+  color:#63B9D2;
+  margin-top=0px;
 }
 
 #swipeThis {
-  height:300px;
-  width: 900px;
+  height:60%;
+  width: 70%;
+  position:relative;
 }
 
 #header {
-background-color: #f3ab1c;
-height: 64px;
-margin-bottom: -3px;
+  background-color: #f3ab1c;
+  height: 64px;
+  margin-bottom: -3px;
 }  
 
 #header #stacks {
-height: 44px;
-background-color: transparent;
+  height: 44px;
+  background-color: transparent;
 }
 
 .left {
-float: left!important;
+  float: left!important;
 }
 
 .fullWidth {
-width: 100%!important;
-margin-left: auto;
-margin-right: auto;
-max-width: initial;
+  width: 100%!important;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial;
 }
 
 .column, .columns {
-position: relative;
-padding-left: .9375rem;
-padding-right: .9375rem;
-float: left;
+  position: relative;
+  padding-left: .9375rem;
+  padding-right: .9375rem;
+  float: left;
 }
 
 #header #stacks img {
-float: left;
-padding-top: 8px;
+  float: left;
+  padding-top: 1px;
+}
+
+#hoverYes {
+  background-color:white;
+  height:60%;
+  width: 35%;
+  z-index:100;
+  position:absolute;
+  top: 35%;
+  left: 50%;
+
 }
