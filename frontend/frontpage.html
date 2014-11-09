@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script> 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>TalentTrail</title>
@@ -15,6 +16,20 @@
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/personality.css" />
     <script src="js/jquery-2.1.1.min.js">  </script>
+    <script>
+var qa = new Firebase('https://radiant-heat-827.firebaseio.com');
+var u = qa.child("users");
+$(document).ready(function() { 
+    $('#user').click(function() { 
+        var toSend = {};
+        var ukey = $("#uid").val(); //key
+        toSend[ukey] = {where:"HackSC"}; // in the future we may want to hold data about the users...
+        u.update(toSend);// ans: 1=yes 0=no
+        $('#uid').text('');
+    });
+});
+
+        </script>
 
   </head>
   <body id="frontimage">
@@ -71,7 +86,7 @@
       </div>
     </div>
   </div> </form>
-        <a role="button" aria-label="submit form" href="#" class="button">Submit</a>
+        <a role="button" href="index.html" class="button">Submit</a>
         </center>
     </div>
 

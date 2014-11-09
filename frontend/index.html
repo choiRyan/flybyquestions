@@ -1,68 +1,137 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script> 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TalentTrail</title>
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0" />
-    <link rel="icon" type="image/ico" href="/img/favicon.ico">
-    <link rel="image_src" href="img/logo.png" />
-    <meta property="og:image" content="http://www.talenttrail.co/assets/img/logo.png" />
-    <meta property="og:title" content="TalentTrail - Internships Delivered" />
-    <meta name="description" content="TalentTrail is a service which helps students and recruiters find their most compatible match by comparing applicants' personality, abilities, and dreams, with companies' culture and talent needs to deliver a tailored internship or job!" />
-    <link rel="stylesheet" href="css/foundation.css" />
-    <link rel="stylesheet" href="css/personality.css" />
-    <script src="js/jquery-2.1.1.min.js"></script>
-    <script src='js/flyby.js'></script>
-  </head>
-  <body>
-  <div class="row fullWidth" id="header">
-    <div class="small-2 medium-4 large-3 xlarge-2 columns">
-        <center>
-            <a id="stacks" class="left">
-                <img class="nodrag" src="img/menu-stacks.png" style="height: 10px;">
-                <h3 style="font-size:17px;">PERSONALITY</h3>
-            </a>
+    <head>
+        <script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script> 
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>TalentTrail</title>
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" type="image/ico" href="/img/favicon.ico">
+        <link rel="image_src" href="img/logo.png" />
+        <meta property="og:image" content="http://www.talenttrail.co/assets/img/logo.png" />
+        <meta property="og:title" content="TalentTrail - Internships Delivered" />
+        <meta name="description" content="TalentTrail is a service which helps students and recruiters find their most compatible match by comparing applicants' personality, abilities, and dreams, with companies' culture and talent needs to deliver a tailored internship or job!" />
+        <link rel="stylesheet" href="css/foundation.css" />
+        <link rel="stylesheet" href="css/personality.css" />
+        <script src="js/jquery-2.1.1.min.js"></script>
+        <script src='js/flyby.js'></script>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+        <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    </head>
+    <body>
+        <div class="row fullWidth" id="header">
+            <div class="small-2 medium-4 large-3 xlarge-2 columns">
+                <center>
+                    <a id="stacks" class="left">
+                        <img class="nodrag" src="img/menu-stacks.png" style="height: 10px;">
+                        <h3 style="font-size:17px;">PERSONALITY</h3>
+                    </a>
 
-        </center>
-    </div>
+                </center>
+            </div>
+            <center>
+                <div id="logo" class="small-8 medium-4 large-offset-1 xlarge-offset-2 columns">
+                    <div style="width: 150px;">
+                        <center>
+                            <a href="http://talenttrail.co">
+                                <img class="nodrag" src="img/logo_white.png" style="height: 100%; width: 100%; padding-top:15px;"></a>
+                        </center>
+                    </div>
+
+                </div>
+            </center> 
+            <div id="profile" class="small-2 medium-1 medium-offset-3 columns">
+
+            </div>
+        </div>
     <center>
-    <div id="logo" class="small-8 medium-4 large-offset-1 xlarge-offset-2 columns">
-        <div style="width: 150px;">
-        <center>
-              <a href="http://talenttrail.co">
-            <img class="nodrag" src="img/logo_white.png" style="height: 100%; width: 100%; padding-top:15px;"></a>
-        </center>
+        <br>
+        <input style="width:400px" type='text' id='uid' onfocus="if (this.value === 'Email') {
+                this.value = '';
+            }">
+        <div id='error'></div><br><br>
+        <button id="start">Start</button>
+        <div id="flyby">
+            <div id="divtimer"> <!--for the timer-->
+                <h3 style="font-size:13px; color:#82848B; padding-top: 16px; margin-bottom: 0px; height:20px;">time remaining</h3>
+                <h3 id="timer"></h3>
+            </div>
+            <div id="swipeThis"> <!--for the body of the swiping thing-->
+                <img id="swipeimg" src="http://i.imgur.com/S3uZOUI.jpg">
+            </div>
+            <a id="yes"><div id="hoverYes"><center><img id="checkmark" src="img/checkmark.png"></center></div></a>
+            <a id="no"><div id="hoverNo"><img id="xmark" src="img/xmark.png"></div></a>
         </div>
+        <div id="remainder">
+            <h1 style="color:black;"> I consider myself to be...</h1>
+            <p>
+                <label style="width:400px;" for="q1">Extraverted, Enthusiastic </label>
+                <input type="hidden" id="q1" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
+            </p>
+            Disagree <div style="width:400px; display: inline-block;" id="slider1"></div> Agree
 
-    </div>
-    </center> 
-    <div id="profile" class="small-2 medium-1 medium-offset-3 columns">
-
-    </div>
-</div>
-  <center>
-    <br>
-    <input style="width:400px" type='text' id='uid' onfocus="if(this.value === 'Email') { this.value = ''; }">
-    <div id='error'></div><br><br>
-    <button id="start">Start</button>
-    <div id="flyby">
-        <div id="divtimer"> <!--for the timer-->
-            <h3 style="font-size:13px; color:#82848B; padding-top: 16px; margin-bottom: 0px; height:20px;">time remaining</h3>
-            <h3 id="timer"></h3>
+            <p>
+                <label style="width:400px;" for="q2">Critical, Quarrelsome </label>
+                <input type="hidden" id="q2" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
+            </p>
+            Disagree <div style="width:400px; display: inline-block;" id="slider2"></div> Agree
+            
+            <p>
+                <label style="width:400px;" for="q3">Dependable, Self-disciplined </label>
+                <input type="hidden" id="q3" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
+            </p>
+            Disagree <div style="width:400px; display: inline-block;" id="slider3"></div> Agree
+            
+            <p>
+                <label style="width:400px;" for="q4">Anxious, Easily Upset</label>
+                <input type="hidden" id="q4" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
+            </p>
+            Disagree <div style="width:400px; display: inline-block;" id="slider4"></div> Agree
+            
+            <p>
+                <label style="width:400px;" for="q5">Open to new experiences, Complex</label>
+                <input type="hidden" id="q5" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
+            </p>
+            Disagree <div style="width:400px; display: inline-block;" id="slider5"></div> Agree
+            
+            <p>
+                <label style="width:400px;" for="q6">Reserved, Quiet </label>
+                <input type="hidden" id="q6" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
+            </p>
+            Disagree <div style="width:400px; display: inline-block;" id="slider6"></div> Agree
+            
+            <p>
+                <label style="width:400px;" for="q7">Sympathetic, Warm </label>
+                <input type="hidden" id="q7" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
+            </p>
+            Disagree <div style="width:400px; display: inline-block;" id="slider7"></div> Agree
+            
+            <p>
+                <label style="width:400px;" for="q8">Disorganized, Careless </label>
+                <input type="hidden" id="q8" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
+            </p>
+            Disagree <div style="width:400px; display: inline-block;" id="slider8"></div> Agree
+            
+            <p>
+                <label style="width:400px;" for="q9">Calm, Emotionally stable </label>
+                <input type="hidden" id="q9" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
+            </p>
+            Disagree <div style="width:400px; display: inline-block;" id="slider9"></div> Agree
+            
+            <p>
+                <label style="width:400px;" for="q10">Conventional, Uncreative </label>
+                <input type="hidden" id="q10" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
+            </p>
+            Disagree <div style="width:400px; display: inline-block;" id="slider10"></div> Agree
+            
+            <div>
+                <input type="text" id="first" style="width:200px; display: inline-block;" onfocus="if(this.value === 'First Name') { this.value = ''; }">
+                <input type="text" id="last" style="width:200px; display: inline-block;" onfocus="if(this.value === 'Last Name') { this.value = ''; }">
+            </div>
+            
         </div>
-        <div id="swipeThis"> <!--for the body of the swiping thing-->
-            <img id="swipeimg" src="http://i.imgur.com/S3uZOUI.jpg">
-        </div>
-        <a id="yes"><div id="hoverYes"><center><img id="checkmark" src="img/checkmark.png"></center></div></a>
-        <a id="no"><div id="hoverNo"><img id="xmark" src="img/xmark.png"></div></a>
-    </div>
-    <div id="remainder">
-        tipi
-    </div>
-  </center>  
-  </body>
+    </center>  
+</body>
 </html>
