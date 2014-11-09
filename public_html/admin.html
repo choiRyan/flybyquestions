@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Admin Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script> 
+        <script src='js/jquery-2.1.1.min.js'></script>
+        <script>
+var qa = new Firebase('https://radiant-heat-827.firebaseio.com');
+var u = qa.child("users");
+var a = qa.child("answers");
+var q = qa.child("questions");
+$(document).ready(function() { 
+    $('#user').click(function() { 
+        var toSend = {};
+        var ukey = $("#uid").val(); //key
+        toSend[ukey] = {where:"HackSC"}; // in the future we may want to hold data about the users...
+        u.update(toSend);// ans: 1=yes 0=no
+        $('#uid').text('');
+    });
+    $('#question').click(function() { 
+        var toSend = {};
+        var qkey = $("#qid").val();
+        toSend = {};
+        toSend[qkey] = {url:$('#url').val()};
+        q.update(toSend);
+        $('#qid').text(''); $('#url').text('');
+    });
+    $('#answer').click(function(){
+        var toSend = {};
+        var akey = $("#qqid").val();
+        toSend[akey] = {uid:$("#quid").val(),ans:$("#ans").val()};
+        a.update(toSend);// ans: 1=yes 0=no
+    });
+});
+
+        </script>
+    </head>
+    <body>
+        <div>
+            UserID: 
+            <input type="text" id='uid'>
+            <button id='user'>Enter User</button>
+            <br>
+            QID: 
+            <input type='text' id='qid'>
+            imgURL: 
+            <input type='text' id='url'>
+            <button id='question'>Enter Question</button>
+            <br>
+            UserID:
+            <input type="text" id='quid'>
+            QID:
+            <input type='text' id='qqid'>
+            ANS:
+            <input type='text' id='ans'>
+            <button id='answer'>Enter Answer</button>
+        </div>
+    </body>
+</html>

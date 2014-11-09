@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Fly-by Questions</title>
+        <title>Flyby</title>
         <script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script> 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +10,26 @@
         <script src='js/flyby.js'></script>
     </head>
     <body>
+    <center>
+        Your Username <input type='text' id='uid'>
+        <div id='timer'></div>
+        <div class='spacer'></div>
         <div id='flyby'>
             <button id="start">Start</button>
-            <br>
-            <img id="eraseme" name="eraseme" src="img/download.png" alt="" width="100" height="180">
+            <div class='spacer'></div>
+            <div id='question'></div>
+            <button id='yes'>Yes cool</button>
+            <button id='no'>Not cool</button>
         </div>
+        <div id='remainder'>
+            rest of the questions go here
+        </div>
+    </center>
     </body>
 </html>
+
+<!--
+application: flyby
+client_id: 39e342b72dfe748
+client_secret: f32514f347cead1aea7e4e2493b58fd7d439f3e3
+-->

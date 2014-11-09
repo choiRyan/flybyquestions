@@ -2,6 +2,16 @@
  * fly.css custom styles for FlyByQuestions
  */
 
-p {
-  text-align: left;
+#question{
+    width:200px; 
+    height:200px;
+}
+.spacer{
+    height:10px;
+}
+#remainder{
+    
+}
+#uid{
+    border-color: #ff0000;
 }
