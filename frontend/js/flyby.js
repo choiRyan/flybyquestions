@@ -176,8 +176,8 @@ function startTest() {
         var a = qa.child("answers");
         var toSend = {};
         toSend = {};
-        toSend[currentID] = {uid: $('#uid').val().replace('.',','), ans: 1};
-        a.update(toSend);
+        toSend[currentID] = {ans: 1};
+        a.child($('#uid').val().replace('.',',')).update(toSend);
         if (picIDs.length > 0)
             nextQuestion();
     });
@@ -186,8 +186,8 @@ function startTest() {
         var a = qa.child("answers");
         var toSend = {};
         toSend = {};
-        toSend[currentID] = {uid: $('#uid').val().replace('.',','), ans: 0};
-        a.update(toSend);
+        toSend[currentID] = {ans: 0};
+        a.child($('#uid').val().replace('.',',')).update(toSend);
         if (picIDs.length > 0)
             nextQuestion();
     });
@@ -199,15 +199,15 @@ $(document).bind('keydown', function(event) {
         if (event.which === 39) { // aka yes
             var toSend = {};
             toSend = {};
-            toSend[currentID] = {uid: $('#uid').val().replace('.',','), ans: 1};
-            a.update(toSend);
+            toSend[currentID] = {ans: 1};
+            a.child($('#uid').val().replace('.',',')).update(toSend);
             if (picIDs.length > 0)
                 nextQuestion();
         } else if (event.which === 37) { // aka no
             var toSend = {};
             toSend = {};
-            toSend[currentID] = {uid: $('#uid').val().replace('.',','), ans: 1};
-            a.update(toSend);
+            toSend[currentID] = {ans: 0};
+            a.child($('#uid').val().replace('.',',')).update(toSend);
             if (picIDs.length > 0)
                 nextQuestion();
         }
