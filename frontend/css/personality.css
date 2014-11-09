@@ -106,3 +106,22 @@
   margin-right: 10%;
   border-radius: 10px;
 }
+
+#frontimage {
+    background:url("../img/3roads.jpg");
+    background-repeat:no-repeat;
+    background-size: 100% 100%;
+    position: static;
+}
+
+#signupbox {
+    margin-top: 150px;
+}
+
+#headersignup {
+  color:#43B4E3;
+}
+
+body.frontimage {
+  background: url("../img/3roads.jpg") repeat 0 0;
+}
