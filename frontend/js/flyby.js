@@ -92,6 +92,7 @@ function waitForStart(){
 function startTest(){           
     document.getElementById('uid').disabled = true;
     $('#start').hide();
+    $('#error').hide();
     $('#uid').hide();
     $('#flyby').show();
     var win = $("#swipeimg");
@@ -101,6 +102,13 @@ function startTest(){
     $("#hoverNo").css({"height": win.height()});
     $("#hoverNo").css({"width": win.width()/2});
     $( "#hoverNo").css( {"top": win.offset().top});
+    
+    //save username
+    var u = qa.child("users");
+    var toSend = {};
+    var ukey = $("#uid").val(); //key for below
+    toSend[ukey] = {where:"HackSC"}; // in the future we may want to hold data about the users... so here
+    u.update(toSend);
     
     var id = setInterval(function() {
         counter--;
@@ -122,34 +130,43 @@ function startTest(){
     }, 1000);
     
     $('#yes').click(function() { // pressed YES to question X
-        //qa.push({qid:0,ans:1,time:0}); 
+        var a = qa.child("answers");
+        var toSend = {};
+        toSend = {};
+        toSend[currentID] = {uid:$('#uid').val(),ans:1};
+        a.update(toSend);        
         if(picIDs.length >0)
             nextQuestion();
     });
     
     $('#no').click(function() { // pressed NO to question X
-        //qa.push({qid:0,ans:0,time:0}); // ans: 1=yes 0=no SAVE Answer
-        if(picIDs.length >0)
-        nextQuestion();
-    });        
-    
-    $('#no').click(function() { // pressed NO to question X
-        //qa.push({qid:0,ans:0,time:0}); // ans: 1=yes 0=no SAVE Answer
+        var a = qa.child("answers");
+        var toSend = {};
+        toSend = {};
+        toSend[currentID] = {uid:$('#uid').val(),ans:0};
+        a.update(toSend);        
         if(picIDs.length >0)
         nextQuestion();
     });        
 }
 
 $(document).bind('keydown', function (event){
+    var a = qa.child("answers");
     if(currentID > 0){
         if ( event.which === 39 ) { // aka yes
-             //qa.push({qid:0,ans:0,time:0}); // ans: 1=yes 0=no SAVE Answer
-             if(picIDs.length >0)
-             nextQuestion();
+            var toSend = {};
+            toSend = {};
+            toSend[currentID] = {uid:$('#uid').val(),ans:1};
+            a.update(toSend);        
+            if(picIDs.length >0)
+            nextQuestion();
         }else if ( event.which === 37 ) { // aka no
-             //qa.push({qid:0,ans:0,time:0}); // ans: 1=yes 0=no SAVE Answer
-             if(picIDs.length >0)
-             nextQuestion();
+            var toSend = {};
+            toSend = {};
+            toSend[currentID] = {uid: $('#uid').val(), ans: 1};
+            a.update(toSend);        
+            if(picIDs.length >0)
+            nextQuestion();
         }
     }
 });
