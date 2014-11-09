@@ -95,3 +95,13 @@
   height:70px;
   position:absolute;
 }
+
+#TTcontents {
+  background-color: white;
+  height:100%;
+  width: 80%;
+  position: absolute;
+  margin-top: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
