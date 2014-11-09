@@ -9,6 +9,8 @@ var counter = 10;
  */
 $(document).ready(function() { // pressed START
     $('#remainder').hide();
+    $('#flyby').hide();
+    document.getElementById("uid").defaultValue = "Username";
     waitForStart();
 });
 
@@ -26,9 +28,15 @@ function waitForStart(){
         u.on("value", function(snapshot) {
             if(snapshot.val()[name]){ // username has been taken
                 console.log("Username has been taken (from " + snapshot.val()[name].where +")");
-                
+                $('#uid').css("border-color", "#ff0000");
+                $('#error').css("color", "#ff0000");
+                $('#error').text("Username has been taken!");
             } 
-            else startTest(); // username is OK.
+            else{
+                $('#error').text("");
+                startTest();
+                $('#uid').css("border-color", "#ffffff");
+            } // username is OK.
         }, function(errorObject) {
             console.log("The FireBase read failed: " + errorObject.code);
         });
@@ -58,13 +66,25 @@ function startTest(){
             $('#flyby').hide();
             $('#remainder').show();
         }
-    }, 100);
+    }, 1000);
     
-    $('#yes').click(function() { // pressed YES to question N
-        qa.push({qid:0,ans:1,time:0}); // ans: 1=yes 0=no
+    $('#yes').click(function() { // pressed YES to question X
+        //qa.push({qid:0,ans:1,time:0}); 
+        nextQuestion();
     });
     
-    $('#no').click(function() { // pressed NO to question N
-        qa.push({qid:0,ans:0,time:0}); // ans: 1=yes 0=no
+    $('#no').click(function() { // pressed NO to question X
+        //qa.push({qid:0,ans:0,time:0}); // ans: 1=yes 0=no SAVE Answer
+        alert("fufufufunope");
+        nextQuestion();
     });        
+}
+
+function nextQuestion(){
+    $('#pic').css("background-image", "url(http://i.imgur.com/bgfXZUj.png)");  
+    alert("fufufufu"); // ans: 1=yes 0=no SAVE Answer
+}
+
+function endTest(){
+    $('#remainder').show();
 }

@@ -11,13 +11,14 @@
     </head>
     <body>
     <center>
-        Your Username <input type='text' id='uid'>
+        <input type='text' id='uid' onfocus="if(this.value === 'Username') { this.value = ''; }">
+        <div id='error'><br></div>
         <div id='timer'></div>
-        <div class='spacer'></div>
+        <div class='spacer'></div>            
+        <button id="start">Start</button>
         <div id='flyby'>
-            <button id="start">Start</button>
             <div class='spacer'></div>
-            <div id='question'></div>
+            <div id='pic' style="background-image:url(http://i.imgur.com/bgfXZUj.png)"></div>
             <button id='yes'>Yes cool</button>
             <button id='no'>Not cool</button>
         </div>
