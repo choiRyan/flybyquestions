@@ -2,25 +2,55 @@
  * Uses Firebase to update and present questions until a timer ends.
  */
 
-var counter = 120;
+var counter = 400;
 var picIDs = [];
 var currentID = 0;
 
 /*
  * When the document is fully loaded, set up the page for use then waitForStart.
  */
-$(document).ready(function() { // pressed START
-    $('#remainder').hide();
-    $('#flyby').hide();
-    document.getElementById("uid").defaultValue = "Username";
-    waitForStart();
-});
+    $(document).ready(function(){
+      $('#remainder').hide();
+      $("#swipeimg").load(function(){
+            var win = $("#swipeimg");
+            $("#hoverYes").css({"height": win.height()});
+            $("#hoverYes").css({"width": win.width()/2});
+            $("#hoverYes").css( {"top": win.offset().top});
+            $("#hoverNo").css({"height": win.height()});
+            $("#hoverNo").css({"width": win.width()/2});
+            $( "#hoverNo").css( {"top": win.offset().top});
+            $("#checkmark").css({"top": win.height()/2-35});
+            $("#xmark").css({"top": win.height()/2-35});
+            $("#checkmark").css({"left": win.width()/4-35});
+            $("#xmark").css({"left": win.width()/4-35});
+            if(currentID === 0){ // this is init procedure
+            $('#flyby').hide();
+            document.getElementById("uid").defaultValue = "Email";
+            waitForStart();
+        }
+      });
+    });
+            
+      $(window).on('resize', function(){
+            var win = $("#swipeimg");
+            $("#hoverYes").css({"height": win.height()});
+            $("#hoverYes").css({"width": win.width()/2});
+            $("#hoverYes").css( {"top": win.offset().top});
+            $("#hoverNo").css({"height": win.height()});
+            $("#hoverNo").css({"width": win.width()/2});
+            $( "#hoverNo").css( {"top": win.offset().top});
+            $("#checkmark").css({"top": win.height()/2-35});
+            $("#xmark").css({"top": win.height()/2-35});
+            $("#checkmark").css({"left": win.width()/4-35});
+            $("#xmark").css({"left": win.width()/4-35});
+      });
+      
 
 var qa = new Firebase('https://radiant-heat-827.firebaseio.com');
 
 function set50IDs(input){
     for(var i = 0; i < input.length; i++){
-        picIDs.push(input[i]);
+        picIDs.push({id:input[i].id, type:input[i].type});
     }
 }
 
@@ -33,17 +63,17 @@ function increment(){
  * the username is taken. If not, start the timer and test.
  */
 function waitForStart(){
-    imgurTrendingPicIDs = readFileAndCallAPI("DO_NOT_COMMIT");
+    readFileAndCallAPI("./DO_NOT_COMMIT");
     $('#start').click(function() {
         //first make sure that the username isn't taken in firebase already
         var u = qa.child("users");
         var name = $('#uid').val();
         u.on("value", function(snapshot) {
             if(snapshot.val()[name]){ // username has been taken
-                console.log("Username has been taken (from " + snapshot.val()[name].where +")");
+                console.log("Email has been taken (from " + snapshot.val()[name].where +")");
                 $('#uid').css("border-color", "#ff0000");
                 $('#error').css("color", "#ff0000");
-                $('#error').text("Username has been taken!");
+                $('#error').text("Email has been taken! (from "+ snapshot.val()[name].where +")");
             } 
             else{
                 $('#error').text("");
@@ -62,7 +92,15 @@ function waitForStart(){
 function startTest(){           
     document.getElementById('uid').disabled = true;
     $('#start').hide();
+    $('#uid').hide();
     $('#flyby').show();
+    var win = $("#swipeimg");
+    $("#hoverYes").css({"height": win.height()});
+    $("#hoverYes").css({"width": win.width()/2});
+    $("#hoverYes").css( {"top": win.offset().top});
+    $("#hoverNo").css({"height": win.height()});
+    $("#hoverNo").css({"width": win.width()/2});
+    $( "#hoverNo").css( {"top": win.offset().top});
     
     var id = setInterval(function() {
         counter--;
@@ -85,18 +123,20 @@ function startTest(){
     
     $('#yes').click(function() { // pressed YES to question X
         //qa.push({qid:0,ans:1,time:0}); 
-        nextQuestion();
+        if(picIDs.length >0)
+            nextQuestion();
     });
     
     $('#no').click(function() { // pressed NO to question X
         //qa.push({qid:0,ans:0,time:0}); // ans: 1=yes 0=no SAVE Answer
+        if(picIDs.length >0)
         nextQuestion();
     });        
 }
 
 function nextQuestion(){
-    document.getElementById("image").src="http://i.imgur.com/"+picIDs[counter].id+"."+picIDs[counter].type;
-    
+    document.getElementById("swipeimg").src="http://i.imgur.com/"+picIDs[currentID].id+"."+picIDs[currentID].type;
+    increment();
 }
 
 function endTest(){
@@ -105,13 +145,15 @@ function endTest(){
 
 //http://stackoverflow.com/questions/14446447/javascript-read-local-text-file
 function readFileAndCallAPI(file){
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
+    /*var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, true);
+    rawFile.send(null);
     rawFile.onreadystatechange = function(){
         if (rawFile.readyState === 4){
             if (rawFile.status === 200 || rawFile.status === 0){
-                var allText = rawFile.responseText;
-                var lineArr = allText.split('\n'); 
+                var allText = rawFile.responseText;*/
+                var allText = "39e342b72dfe748\n";
+                var lineArr = allText.split('\n');
                 jQuery.ajax({
                     url: 'https://api.imgur.com/3/gallery/hot/',
                     type: 'GET',
@@ -124,18 +166,17 @@ function readFileAndCallAPI(file){
                             var ids = [];
                             for (var i = 0; i < response.data.length; i++) {
                                 if(response.data[i].type)
-                                    ids.push({id:response.data[i].id,type:response.data[i].type.split("/")[1]});
+                                    ids.push({id:response.data[i].id, type:response.data[i].type.split("/")[1]});
                                 else
-                                    ids.push({id:response.data[i].id,type:"jpg"});
+                                    ids.push({id:response.data[i].id, type:"jpg"});
                             }
                             set50IDs(ids); // CLOSURES!
                         }else{
                             alert("No response");
                         }
                     }
-                }); 
+                }); /*
             }
         }
-    };
-    rawFile.send(null);
+    };*/
 }
