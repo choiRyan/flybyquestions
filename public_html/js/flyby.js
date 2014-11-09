@@ -3,6 +3,8 @@
  */
 
 var counter = 10;
+var picIDs = [];
+var currentID = 0;
 
 /*
  * When the document is fully loaded, set up the page for use then waitForStart.
@@ -16,11 +18,23 @@ $(document).ready(function() { // pressed START
 
 var qa = new Firebase('https://radiant-heat-827.firebaseio.com');
 
+function set50IDs(input){
+    alert(input);
+    for(var i = 0; i < input.length; i++){
+        picIDs.push(input[i]);
+    }
+}
+
+function increment(){
+    currentID = currentID+1;
+}
+
 /*
  * When the start button is pressed, check the textfield and see if
  * the username is taken. If not, start the timer and test.
  */
 function waitForStart(){
+    imgurTrendingPicIDs = readFileAndCallAPI("DO_NOT_COMMIT");
     $('#start').click(function() {
         //first make sure that the username isn't taken in firebase already
         var u = qa.child("users");
@@ -49,6 +63,8 @@ function waitForStart(){
 function startTest(){           
     document.getElementById('uid').disabled = true;
     $('#start').hide();
+    $('#flyby').show();
+    
     var id = setInterval(function() {
         counter--;
         if (counter > 0) {
@@ -75,16 +91,49 @@ function startTest(){
     
     $('#no').click(function() { // pressed NO to question X
         //qa.push({qid:0,ans:0,time:0}); // ans: 1=yes 0=no SAVE Answer
-        alert("fufufufunope");
         nextQuestion();
     });        
 }
 
 function nextQuestion(){
-    $('#pic').css("background-image", "url(http://i.imgur.com/bgfXZUj.png)");  
-    alert("fufufufu"); // ans: 1=yes 0=no SAVE Answer
+    document.getElementById("image").src="http://i.imgur.com/"+picIDs[counter]+".jpg";
+    
 }
 
 function endTest(){
     $('#remainder').show();
+}
+
+//http://stackoverflow.com/questions/14446447/javascript-read-local-text-file
+function readFileAndCallAPI(file){
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function(){
+        if (rawFile.readyState === 4){
+            if (rawFile.status === 200 || rawFile.status === 0){
+                var allText = rawFile.responseText;
+                var lineArr = allText.split('\n'); 
+                jQuery.ajax({
+                    url: 'https://api.imgur.com/3/gallery/hot/',
+                    type: 'GET',
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader('Authorization', 'Client-ID ' + lineArr[0]);
+                    },
+                    success: function(response) {
+                        // response; have imgur data here
+                        if (response && response.data) {
+                            var ids = [];
+                            for (var i = 0; i < response.data.length; i++) {
+                                ids.push(response.data[i].id);
+                            }
+                            set50IDs(ids); // CLOSURES!
+                        }else{
+                            alert("No response");
+                        }
+                    }
+                }); 
+            }
+        }
+    };
+    rawFile.send(null);
 }
