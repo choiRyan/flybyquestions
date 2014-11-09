@@ -2,7 +2,7 @@
  * Uses Firebase to update and present questions until a timer ends.
  */
 
-var counter = 400;
+var counter = 20;
 var picIDs = [];
 var currentID = 0;
 
@@ -132,7 +132,27 @@ function startTest(){
         if(picIDs.length >0)
         nextQuestion();
     });        
+    
+    $('#no').click(function() { // pressed NO to question X
+        //qa.push({qid:0,ans:0,time:0}); // ans: 1=yes 0=no SAVE Answer
+        if(picIDs.length >0)
+        nextQuestion();
+    });        
 }
+
+$(document).bind('keydown', function (event){
+    if(currentID > 0){
+        if ( event.which === 39 ) { // aka yes
+             //qa.push({qid:0,ans:0,time:0}); // ans: 1=yes 0=no SAVE Answer
+             if(picIDs.length >0)
+             nextQuestion();
+        }else if ( event.which === 37 ) { // aka no
+             //qa.push({qid:0,ans:0,time:0}); // ans: 1=yes 0=no SAVE Answer
+             if(picIDs.length >0)
+             nextQuestion();
+        }
+    }
+});
 
 function nextQuestion(){
     document.getElementById("swipeimg").src="http://i.imgur.com/"+picIDs[currentID].id+"."+picIDs[currentID].type;
@@ -152,7 +172,7 @@ function readFileAndCallAPI(file){
         if (rawFile.readyState === 4){
             if (rawFile.status === 200 || rawFile.status === 0){
                 var allText = rawFile.responseText;*/
-                var allText = "39e342b72dfe748\n";
+                var allText = "39e342b72dfe748\n"; // yeah idgaf, this isn't an oath2 key anyways
                 var lineArr = allText.split('\n');
                 jQuery.ajax({
                     url: 'https://api.imgur.com/3/gallery/hot/',
