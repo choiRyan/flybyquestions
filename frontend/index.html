@@ -24,7 +24,10 @@
             $("#hoverNo").css({"height": win.height()});
             $("#hoverNo").css({"width": win.width()/2});
             $( "#hoverNo").css( {"top": win.offset().top});
-            $("#checkmark").css("top", "50px");
+            $("#checkmark").css({"top": win.height()/2-35});
+            $("#xmark").css({"top": win.height()/2-35});
+            $("#checkmark").css({"left": win.width()/4-35});
+            $("#xmark").css({"left": win.width()/4-35});
       });
     });
             
@@ -74,9 +77,9 @@
 </center>
 <center>
 <div id="swipeThis"> <!--for the body of the swiping thing-->
-  <img id="swipeimg" src="http://i.imgur.com/bgfXZUj.png">
+  <img id="swipeimg" src="http://i.imgur.com/Ao6RweL.jpeg">
 </div>
-<div id="hoverYes"><img id="checkmark" src="img/checkmark.png"></div>
+<div id="hoverYes"><center><img id="checkmark" src="img/checkmark.png"></center></div>
 <div id="hoverNo"><img id="xmark" src="img/xmark.png"></div>
   </center>  
   </body>

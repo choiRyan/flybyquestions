@@ -5283,6 +5283,10 @@ th.hide-for-touch {
   position:relative;
 }
 
+#swipeimg {
+  height:400px;
+}
+
 #header {
   background-color: #f3ab1c;
   height: 64px;
@@ -5349,8 +5353,10 @@ th.hide-for-touch {
 
 #checkmark {
   height:70px;
+  position:absolute;
 }
 
 #xmark {
   height:70px;
+  position:absolute;
 }
