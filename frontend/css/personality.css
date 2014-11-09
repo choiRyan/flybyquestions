@@ -98,10 +98,11 @@
 
 #TTcontents {
   background-color: white;
-  height:100%;
+  height:80%;
   width: 80%;
   position: absolute;
   margin-top: 40px;
   margin-left: 10%;
   margin-right: 10%;
+  border-radius: 10px;
 }
