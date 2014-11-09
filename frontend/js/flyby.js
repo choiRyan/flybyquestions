@@ -2,7 +2,7 @@
  * Uses Firebase to update and present questions until a timer ends.
  */
 
-var counter = 60;
+var counter = 45;
 var picIDs = [];
 var currentID = 0;
 
