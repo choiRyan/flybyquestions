@@ -2,7 +2,7 @@
  * Uses Firebase to update and present questions until a timer ends.
  */
 
-var counter = 1;
+var counter = 20;
 var picIDs = [];
 var currentID = 0;
 
@@ -26,10 +26,22 @@ $(document).ready(function() {
         if (currentID === 0) { // this is init procedure
             $('#flyby').hide();
             document.getElementById("uid").defaultValue = "Email";
-            document.getElementById("last").defaultValue = "Last Name";
-            document.getElementById("first").defaultValue = "First Name";
+            document.getElementById("lastn").defaultValue = "Last Name";
+            document.getElementById("firstn").defaultValue = "First Name";
             waitForStart();
         }
+    });
+
+    /*
+     * DONE with the survey. Now start over...
+     */
+    $('#done').click(function() { // done! now call endtipi w. the tipi data as input
+        var toSend = {};
+        var u = qa.child("users");
+        var ukey = $("#uid").val(); //key for below
+        toSend[ukey] = {"first": $("#firstn").val(), "last": $("#lastn").val(), tipi1: $("#q1").val(), tipi2: $("#q2").val(), tipi3: $("#q3").val(), tipi4: $("#q4").val(), tipi5: $("#q5").val(), tipi6: $("#q6").val(), tipi7: $("#q7").val(), tipi8: $("#q8").val(), tipi9: $("#q9").val(), tipi10: $("#q10").val()};
+        u.update(toSend);
+        window.location = window.location.pathname;
     });
 });
 
@@ -158,7 +170,7 @@ function startTest() {
 
 $(document).bind('keydown', function(event) {
     var a = qa.child("answers");
-    if (currentID > 0) {
+    if (currentID > 0 && currentID < picIDs.length) {
         if (event.which === 39) { // aka yes
             var toSend = {};
             toSend = {};
@@ -180,21 +192,17 @@ $(document).bind('keydown', function(event) {
 function nextQuestion() {
     document.getElementById("swipeimg").src = "http://i.imgur.com/" + picIDs[currentID].id + "." + picIDs[currentID].type;
     increment();
+    if (currentID >= picIDs.length) {
+        //now get the rest of the questions here in the same or next page.
+        $('#flyby').hide();
+        $('#remainder').show();
+        endTest();
+    }
 }
 
 function endTest() {
     $('#remainder').show();
 }
-
-
-function endTipi(tipi){
-    var u = qa.child("users");
-    var toSend = {};
-    var ukey = $("#uid").val(); //key for below
-    toSend[ukey] = {first: $('#first').val(), last:$('#last').val(), tipi1: tipi[0], tipi2:tipi[1], tipi3:tipi[2],tipi4:tipi[3], tipi5:tipi[4], tipi6:tipi[5], tipi7:tipi[6], tipi8:tipi[7], tipi9:tipi[8], tipi10:tipi[9]}; // in the future we may want to hold data about the users... so here
-    u.update(toSend);    
-}
-
 
 //http://stackoverflow.com/questions/14446447/javascript-read-local-text-file
 function readFileAndCallAPI(file) {
@@ -208,7 +216,8 @@ function readFileAndCallAPI(file) {
     var allText = "39e342b72dfe748\n"; // yeah idgaf, this isn't an oath2 key anyways
     var lineArr = allText.split('\n');
     jQuery.ajax({
-        url: 'https://api.imgur.com/3/gallery/hot/',
+        /*url: 'https://api.imgur.com/3/gallery/hot/',*/
+        url: 'https://api.imgur.com/3/account/kobesarmy/album/XHabO',
         type: 'GET',
         beforeSend: function(xhr) {
             xhr.setRequestHeader('Authorization', 'Client-ID ' + lineArr[0]);
@@ -216,12 +225,18 @@ function readFileAndCallAPI(file) {
         success: function(response) {
             // response; have imgur data here
             if (response && response.data) {
-                var ids = [];
-                for (var i = 0; i < response.data.length; i++) {
-                    if (response.data[i].type)
-                        ids.push({id: response.data[i].id, type: response.data[i].type.split("/")[1]});
+                var ids = [];/*
+                 for (var i = 0; i < response.data.length; i++) {
+                 if (response.data[i].type)
+                 ids.push({id: response.data[i].id, type: response.data[i].type.split("/")[1]});
+                 else
+                 ids.push({id: response.data[i].id, type: "jpg"});
+                 */
+                for (var i = 0; i < response.data.images.length; i++) {
+                    if (response.data.images[i].type)
+                        ids.push({id: response.data.images[i].id, type: response.data.images[i].type.split("/")[1]});
                     else
-                        ids.push({id: response.data[i].id, type: "jpg"});
+                        ids.push({id: response.data.images[i].id, type: "jpg"});
                 }
                 set50IDs(ids); // CLOSURES!
             } else {
@@ -233,7 +248,7 @@ function readFileAndCallAPI(file) {
      }
      };*/
 
-     
+
 
     //slider things (http://jqueryui.com/slider/#steps)
     $(function() {
@@ -328,17 +343,17 @@ function readFileAndCallAPI(file) {
             }
         });
         /*
-        $("#q1").val($("#slider1").slider("value"));
-        $("#q2").val($("#slider2").slider("value"));
-        $("#q3").val($("#slider3").slider("value"));
-        $("#q4").val($("#slider4").slider("value"));
-        $("#q5").val($("#slider5").slider("value"));
-        $("#q6").val($("#slider6").slider("value"));
-        $("#q7").val($("#slider7").slider("value"));
-        $("#q8").val($("#slider8").slider("value"));
-        $("#q9").val($("#slider9").slider("value"));
-        $("#q10").val($("#slider10").slider("value"));*/
+         $("#q1").val($("#slider1").slider("value"));
+         $("#q2").val($("#slider2").slider("value"));
+         $("#q3").val($("#slider3").slider("value"));
+         $("#q4").val($("#slider4").slider("value"));
+         $("#q5").val($("#slider5").slider("value"));
+         $("#q6").val($("#slider6").slider("value"));
+         $("#q7").val($("#slider7").slider("value"));
+         $("#q8").val($("#slider8").slider("value"));
+         $("#q9").val($("#slider9").slider("value"));
+         $("#q10").val($("#slider10").slider("value"));*/
     });
 
-    
+
 }
