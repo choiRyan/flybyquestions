@@ -13,16 +13,31 @@
     <meta property="og:title" content="TalentTrail - Internships Delivered" />
     <meta name="description" property="og:description" content="TalentTrail is a service which helps students and recruiters find their most compatible match by comparing applicants' personality, abilities, and dreams, with companies' culture and talent needs to deliver a tailored internship or job!" />
     <link rel="stylesheet" href="css/foundation.css" />
-    <script src="js/jquery-2.1.1.min.js"/>
+    <script src="js/jquery-2.1.1.min.js">  </script>
     <script>
-      $(document).ready(function() {
-        alert("f");
-      });
-      /*$(window).on('resize', function(){
-            var win = $(this); //this = window
-            alert(win.height());
+    $(document).ready(function(){
+      $("#swipeimg").load(function(){
+            var win = $("#swipeimg");
             $("#hoverYes").css({"height": win.height()});
-      });*/
+            $("#hoverYes").css({"width": win.width()/2});
+            $("#hoverYes").css( {"top": win.offset().top});
+            $("#hoverNo").css({"height": win.height()});
+            $("#hoverNo").css({"width": win.width()/2});
+            $( "#hoverNo").css( {"top": win.offset().top});
+            $("#checkmark").css("top", "50px");
+      });
+    });
+            
+      $(window).on('resize', function(){
+            var win = $("#swipeimg");
+            $("#hoverYes").css({"height": win.height()});
+            $("#hoverYes").css({"width": win.width()/2});
+            $("#hoverYes").css( {"top": win.offset().top});
+            $("#hoverNo").css({"height": win.height()});
+            $("#hoverNo").css({"width": win.width()/2});
+            $( "#hoverNo").css( {"top": win.offset().top});
+      });
+
     </script>
   </head>
   <body>
@@ -46,7 +61,7 @@
         </div>
 
     </div>
-    </center>
+    </center> 
     <div id="profile" class="small-2 medium-1 medium-offset-3 columns">
 
     </div>
@@ -59,9 +74,10 @@
 </center>
 <center>
 <div id="swipeThis"> <!--for the body of the swiping thing-->
-  <img src="http://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg">
+  <img id="swipeimg" src="http://i.imgur.com/bgfXZUj.png">
 </div>
-<div id="hoverYes"></div>
+<div id="hoverYes"><img id="checkmark" src="img/checkmark.png"></div>
+<div id="hoverNo"><img id="xmark" src="img/xmark.png"></div>
   </center>  
   </body>
 </html>

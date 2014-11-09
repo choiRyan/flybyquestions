@@ -5279,7 +5279,6 @@ th.hide-for-touch {
 }
 
 #swipeThis {
-  height:60%;
   width: 70%;
   position:relative;
 }
@@ -5320,11 +5319,38 @@ th.hide-for-touch {
 
 #hoverYes {
   background-color:white;
-  height:60%;
-  width: 35%;
   z-index:100;
   position:absolute;
-  top: 35%;
+  top: 34%;
   left: 50%;
+  opacity: 0.0;
+}
 
+#hoverYes:hover {
+    opacity: 0.5;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
+
+#hoverNo {
+  background-color:white;
+  z-index:100;
+  position:absolute;
+  top: 34%;
+  right: 50%;
+  opacity: 0.0;
+
+}
+
+#hoverNo:hover {
+    opacity: 0.5;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
+#checkmark {
+  height:70px;
+}
+
+#xmark {
+  height:70px;
 }
