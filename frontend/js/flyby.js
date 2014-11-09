@@ -39,9 +39,34 @@ $(document).ready(function() {
         var toSend = {};
         var u = qa.child("users");
         var ukey = $("#uid").val(); //key for below
-        toSend[ukey] = {"first": $("#firstn").val(), "last": $("#lastn").val(), tipi1: $("#q1").val(), tipi2: $("#q2").val(), tipi3: $("#q3").val(), tipi4: $("#q4").val(), tipi5: $("#q5").val(), tipi6: $("#q6").val(), tipi7: $("#q7").val(), tipi8: $("#q8").val(), tipi9: $("#q9").val(), tipi10: $("#q10").val()};
+        toSend[ukey] = {where: "HackSC", "first": $("#firstn").val(), "last": $("#lastn").val(), tipi1: $("#q1").val(), tipi2: $("#q2").val(), tipi3: $("#q3").val(), tipi4: $("#q4").val(), tipi5: $("#q5").val(), tipi6: $("#q6").val(), tipi7: $("#q7").val(), tipi8: $("#q8").val(), tipi9: $("#q9").val(), tipi10: $("#q10").val()};
         u.update(toSend);
-        window.location = window.location.pathname;
+        $('#remainder').hide();
+        var o = parseInt(toSend[ukey].tipi5) + 8 - parseInt(toSend[ukey].tipi10);
+        var c = parseInt(toSend[ukey].tipi3) + 8 - parseInt(toSend[ukey].tipi8);
+        var e = parseInt(toSend[ukey].tipi1) + 8 - parseInt(toSend[ukey].tipi6);
+        var a = 8 - parseInt(toSend[ukey].tipi2) + parseInt(toSend[ukey].tipi7);
+        var n = parseInt(toSend[ukey].tipi4) + 8 - parseInt(toSend[ukey].tipi9);
+        var chart = new CanvasJS.Chart("charts", {
+            title: {
+                text: "Personality Estimates"
+            },
+            data: [//array of dataSeries              
+                { //dataSeries object
+
+                    type: "column",
+                    dataPoints: [
+                        {label: "Openness to Experience", y: o},
+                        {label: "Conscientious", y: c},
+                        {label: "Extraversion", y: e},
+                        {label: "Agreeableness", y: a},
+                        {label: "Neuroticism", y: n}
+                    ]
+                }
+            ]
+        });
+        chart.render();
+        $('#charts').show();
     });
 });
 
@@ -247,8 +272,6 @@ function readFileAndCallAPI(file) {
      }
      }
      };*/
-
-
 
     //slider things (http://jqueryui.com/slider/#steps)
     $(function() {
