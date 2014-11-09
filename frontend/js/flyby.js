@@ -38,7 +38,7 @@ $(document).ready(function() {
     $('#done').click(function() { // done! now call endtipi w. the tipi data as input
         var toSend = {};
         var u = qa.child("users");
-        var ukey = $("#uid").val(); //key for below
+        var ukey = $("#uid").val().replace('.',','); //key for below
         toSend[ukey] = {where: "HackSC", "first": $("#firstn").val(), "last": $("#lastn").val(), tipi1: $("#q1").val(), tipi2: $("#q2").val(), tipi3: $("#q3").val(), tipi4: $("#q4").val(), tipi5: $("#q5").val(), tipi6: $("#q6").val(), tipi7: $("#q7").val(), tipi8: $("#q8").val(), tipi9: $("#q9").val(), tipi10: $("#q10").val()};
         u.update(toSend);
         $('#remainder').hide();
@@ -106,13 +106,13 @@ function waitForStart() {
     $('#start').click(function() {
         //first make sure that the username isn't taken in firebase already
         var u = qa.child("users");
-        var name = $('#uid').val();
+        var name = $('#uid').val().replace('.',',');
         u.on("value", function(snapshot) {
             if (snapshot.val()[name]) { // username has been taken
-                console.log("Email has been taken (from " + snapshot.val()[name].where + ")");
+                console.log("Email has been taken (from " + (snapshot.val()[name]).replace(',','.').where + ")");
                 $('#uid').css("border-color", "#ff0000");
                 $('#error').css("color", "#ff0000");
-                $('#error').text("Email has been taken! (from " + snapshot.val()[name].where + ")");
+                $('#error').text("Email has been taken! (from " + (snapshot.val()[name]).replace(',','.').where + ")");
             }
             else {
                 $('#error').text("");
@@ -145,7 +145,7 @@ function startTest() {
     //save username
     var u = qa.child("users");
     var toSend = {};
-    var ukey = $("#uid").val(); //key for below
+    var ukey = $("#uid").val().replace('.',','); //key for below
     toSend[ukey] = {where: "HackSC"}; // in the future we may want to hold data about the users... so here
     u.update(toSend);
 
@@ -176,7 +176,7 @@ function startTest() {
         var a = qa.child("answers");
         var toSend = {};
         toSend = {};
-        toSend[currentID] = {uid: $('#uid').val(), ans: 1};
+        toSend[currentID] = {uid: $('#uid').val().replace('.',','), ans: 1};
         a.update(toSend);
         if (picIDs.length > 0)
             nextQuestion();
@@ -186,7 +186,7 @@ function startTest() {
         var a = qa.child("answers");
         var toSend = {};
         toSend = {};
-        toSend[currentID] = {uid: $('#uid').val(), ans: 0};
+        toSend[currentID] = {uid: $('#uid').val().replace('.',','), ans: 0};
         a.update(toSend);
         if (picIDs.length > 0)
             nextQuestion();
@@ -199,14 +199,14 @@ $(document).bind('keydown', function(event) {
         if (event.which === 39) { // aka yes
             var toSend = {};
             toSend = {};
-            toSend[currentID] = {uid: $('#uid').val(), ans: 1};
+            toSend[currentID] = {uid: $('#uid').val().replace('.',','), ans: 1};
             a.update(toSend);
             if (picIDs.length > 0)
                 nextQuestion();
         } else if (event.which === 37) { // aka no
             var toSend = {};
             toSend = {};
-            toSend[currentID] = {uid: $('#uid').val(), ans: 1};
+            toSend[currentID] = {uid: $('#uid').val().replace('.',','), ans: 1};
             a.update(toSend);
             if (picIDs.length > 0)
                 nextQuestion();
