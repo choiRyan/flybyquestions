@@ -109,10 +109,10 @@ function waitForStart() {
         var name = $('#uid').val().replace('.',',');
         u.on("value", function(snapshot) {
             if (snapshot.val()[name]) { // username has been taken
-                console.log("Email has been taken (from " + (snapshot.val()[name]).replace(',','.').where + ")");
+                console.log("Email has been taken (from " + (snapshot.val()[name]).where + ")");
                 $('#uid').css("border-color", "#ff0000");
                 $('#error').css("color", "#ff0000");
-                $('#error').text("Email has been taken! (from " + (snapshot.val()[name]).replace(',','.').where + ")");
+                $('#error').text("Email has been taken! (from " + (snapshot.val()[name]).where + ")");
             }
             else {
                 $('#error').text("");
