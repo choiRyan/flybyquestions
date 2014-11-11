@@ -2,7 +2,7 @@
  * Uses Firebase to update and present questions until a timer ends.
  */
 
-var counter = 45;
+var counter = 60;
 var picIDs = [];
 var currentID = 0;
 
@@ -11,6 +11,35 @@ var currentID = 0;
  */
 $(document).ready(function() {
     $('#remainder').hide();
+    $('#next2').hide();
+    $('#question2').hide();
+    $('#next3').hide();
+    $('#question3').hide();
+    $('#next4').hide();
+    $('#question4').hide();
+    $('#next5').hide();
+    $('#question5').hide();
+    $('#next6').hide();
+    $('#question6').hide();
+    $('#next7').hide();
+    $('#question7').hide();
+    $('#next8').hide();
+    $('#question8').hide();
+    $('#next9').hide();
+    $('#question9').hide();
+    $('#next10').hide();
+    $('#question10').hide();
+    $('#agree2').hide();
+    $('#agree3').hide();
+    $('#agree4').hide();
+    $('#agree5').hide();
+    $('#agree6').hide();
+    $('#agree7').hide();
+    $('#agree8').hide();
+    $('#agree9').hide();
+    $('#agree10').hide();
+    $('#done').hide();
+    $('#askName').hide();
     $("#swipeimg").load(function() {
         var win = $("#swipeimg");
         $("#hoverYes").css({"height": win.height()});
@@ -31,6 +60,87 @@ $(document).ready(function() {
             waitForStart();
         }
     });
+    $('#next1').click(function() { // done! now call endtipi w. the tipi data as input
+        $('#next1').hide();
+        $('#question1').hide();
+        $('#agree1').hide();
+        $('#next2').show();
+        $('#question2').show();
+        $('#agree2').show();
+    });
+    $('#next2').click(function() { // done! now call endtipi w. the tipi data as input
+        $('#next2').hide();
+        $('#question2').hide();
+        $('#agree2').hide();
+        $('#next3').show();
+        $('#question3').show();
+        $('#slider3').show();
+        $('#agree3').show();
+    });
+    $('#next3').click(function() { // done! now call endtipi w. the tipi data as input
+        $('#next3').hide();
+        $('#question3').hide();
+        $('#agree3').hide();
+        $('#next4').show();
+        $('#question4').show();
+        $('#agree4').show();
+    });
+    $('#next4').click(function() { // done! now call endtipi w. the tipi data as input
+        $('#next4').hide();
+        $('#question4').hide();
+        $('#agree4').hide();
+        $('#next5').show();
+        $('#question5').show();
+        $('#agree5').show();
+    });
+    $('#next5').click(function() { // done! now call endtipi w. the tipi data as input
+        $('#next5').hide();
+        $('#question5').hide();
+        $('#agree5').hide();
+        $('#next6').show();
+        $('#question6').show();
+        $('#agree6').show();
+    });
+    $('#next6').click(function() { // done! now call endtipi w. the tipi data as input
+        $('#next6').hide();
+        $('#question6').hide();
+        $('#agree6').hide();
+        $('#next7').show();
+        $('#question7').show();
+        $('#agree7').show();
+    });
+    $('#next7').click(function() { // done! now call endtipi w. the tipi data as input
+        $('#next7').hide();
+        $('#question7').hide();
+        $('#agree7').hide();
+        $('#next8').show();
+        $('#question8').show();
+        $('#agree8').show();
+    });
+    $('#next8').click(function() { // done! now call endtipi w. the tipi data as input
+        $('#next8').hide();
+        $('#question8').hide();
+        $('#agree8').hide();
+        $('#next9').show();
+        $('#question9').show();
+        $('#agree9').show();
+    });
+    $('#next9').click(function() { // done! now call endtipi w. the tipi data as input
+        $('#next9').hide();
+        $('#question9').hide();
+        $('#agree9').hide();
+        $('#next10').show();
+        $('#question10').show();
+        $('#agree10').show();
+    });
+    $('#next10').click(function() { // done! now call endtipi w. the tipi data as input
+        $('#next10').hide();
+        $('#question10').hide();
+        $('#agree10').hide();
+        $('#askName').show();
+        $('#done').show();
+    });
+
 
     /*
      * DONE with the survey. Now start over...
@@ -105,6 +215,7 @@ function waitForStart() {
     readFileAndCallAPI("./DO_NOT_COMMIT");
     $('#start').click(function() {
         //first make sure that the username isn't taken in firebase already
+        $('#instructions').hide();
         var u = qa.child("users");
         var name = $('#uid').val().replace('.',',');
         u.on("value", function(snapshot) {

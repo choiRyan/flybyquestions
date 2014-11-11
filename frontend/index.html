@@ -48,6 +48,7 @@
             </div>
         </div>
     <center>
+        <div id="instructions"><p style="color:black;" align="left">After submitting your email, choose whether or not you feel <strong>an association with the image</strong> or not by clicking on the <strong>right side or left side </strong> of the image. You can also use the left or right arrows.</p></div>
         <br>
         <input style="width:400px" type='text' id='uid' onfocus="if (this.value === 'Email') {
                 this.value = '';
@@ -67,67 +68,77 @@
         </div>
         <div id="remainder">
             <h1 style="color:black;"> I consider myself to be...</h1>
-            <p>
+            <p id="question1">
                 <label style="width:400px;" for="q1">Extraverted, Enthusiastic </label>
                 <input type="hidden" id="q1" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
             </p>
-            Disagree <div style="width:400px; display: inline-block;" id="slider1"></div> Agree
+            <div id="agree1">Disagree <div style="width:400px; display: inline-block;" id="slider1"></div> Agree </div>
+            <button id="next1">Next</button>
 
-            <p>
+            <p id="question2"> 
                 <label style="width:400px;" for="q2">Critical, Quarrelsome </label>
                 <input type="hidden" id="q2" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
             </p>
-            Disagree <div style="width:400px; display: inline-block;" id="slider2"></div> Agree
+            <div id="agree2">Disagree <div style="width:400px; display: inline-block;" id="slider2"></div> Agree </div>
+            <button id="next2">Next</button>
             
-            <p>
+            <p id="question3">
                 <label style="width:400px;" for="q3">Dependable, Self-disciplined </label>
                 <input type="hidden" id="q3" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
             </p>
-            Disagree <div style="width:400px; display: inline-block;" id="slider3"></div> Agree
-            
-            <p>
+            <div id="agree3">Disagree <div style="width:400px; display: inline-block;" id="slider3"></div> Agree</div>
+            <button id="next3">Next</button>
+
+            <p id="question4">
                 <label style="width:400px;" for="q4">Anxious, Easily Upset</label>
                 <input type="hidden" id="q4" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
             </p>
-            Disagree <div style="width:400px; display: inline-block;" id="slider4"></div> Agree
+            <div id="agree4">Disagree <div style="width:400px; display: inline-block;" id="slider4"></div> Agree</div>
+            <button id="next4">Next</button>
             
-            <p>
+            <p id="question5">
                 <label style="width:400px;" for="q5">Open to new experiences, Complex</label>
                 <input type="hidden" id="q5" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
             </p>
-            Disagree <div style="width:400px; display: inline-block;" id="slider5"></div> Agree
-            
-            <p>
+            <div id="agree5">Disagree <div style="width:400px; display: inline-block;" id="slider5"></div> Agree </div>
+            <button id="next5">Next</button>
+
+            <p id="question6">
                 <label style="width:400px;" for="q6">Reserved, Quiet </label>
                 <input type="hidden" id="q6" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
             </p>
-            Disagree <div style="width:400px; display: inline-block;" id="slider6"></div> Agree
-            
-            <p>
+            <div id="agree6">Disagree <div style="width:400px; display: inline-block;" id="slider6"></div> Agree</div>
+            <button id="next6">Next</button>
+
+            <p id="question7">
                 <label style="width:400px;" for="q7">Sympathetic, Warm </label>
                 <input type="hidden" id="q7" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
             </p>
-            Disagree <div style="width:400px; display: inline-block;" id="slider7"></div> Agree
-            
-            <p>
-                <label style="width:400px;" for="q8">Disorganized, Careless </label>
+            <div id="agree7">Disagree <div style="width:400px; display: inline-block;" id="slider7"></div> Agree</div>
+            <button id="next7">Next</button>
+
+            <p id="question8">
+              <label style="width:400px;" for="q8">Disorganized, Careless </label>
                 <input type="hidden" id="q8" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
             </p>
-            Disagree <div style="width:400px; display: inline-block;" id="slider8"></div> Agree
-            
-            <p>
+            <div id="agree8">Disagree <div style="width:400px; display: inline-block;" id="slider8"></div> Agree</div>
+            <button id="next8">Next</button>
+
+            <p id="question9">
                 <label style="width:400px;" for="q9">Calm, Emotionally stable </label>
                 <input type="hidden" id="q9" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
             </p>
-            Disagree <div style="width:400px; display: inline-block;" id="slider9"></div> Agree
-            
-            <p>
+            <div id="agree9">Disagree <div style="width:400px; display: inline-block;" id="slider9"></div> Agree</div>
+            <button id="next9">Next</button>
+
+            <p id="question10">
                 <label style="width:400px;" for="q10">Conventional, Uncreative </label>
                 <input type="hidden" id="q10" style="border:0; width:400px; color:#f6931f; font-weight:bold;">
             </p>
-            Disagree <div style="width:400px; display: inline-block;" id="slider10"></div> Agree
-            
-            <div>
+            <div id="agree10">Disagree <div style="width:400px; display: inline-block;" id="slider10"></div> Agree</div>
+            <button id="next10">Next</button>
+
+            <div id="askName">
                 <input type="text" id="firstn" style="width:200px; display: inline-block;" onfocus="if(this.value === 'First Name') { this.value = ''; }">
                 <input type="text" id="lastn" style="width:200px; display: inline-block;" onfocus="if(this.value === 'Last Name') { this.value = ''; }">
             </div>
