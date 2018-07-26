@@ -1,7 +1,7 @@
 flybyquestions
 ==============
 
-HackSC Fall 2014: Ryan Choi & Sydney Liu
+HackSC Fall 2014
 
 The user goes through a number of images rapid-fire style and decides if the picture is at all interesting to him/her. Then the user takes a quick personality approximation survey (validated in open scientific literature), and then the pictures are analyzed for any behavioral correlations. The user also sees the personality approximation at the end of the application. Total time taken should not exceed 2~3 minutes - the test is designed for speed more than anything else.
 
